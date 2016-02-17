@@ -55,7 +55,7 @@ class LSTMDQN(Model):
     self.cell = rnn_cell.BasicLSTMCell(self.rnn_size)
     self.stacked_cell = rnn_cell.MultiRNNCell([self.cell] * self.layer_depth)
 
-    outputs, _ = rnn.rnn(self.cell,
+    outputs, _ = rnn.rnn(self.stacked_cell,
                          [tf.squeeze(embed_t) for embed_t in tf.split(1, self.seq_length, word_embeds)],
                          dtype=tf.float32)
 
